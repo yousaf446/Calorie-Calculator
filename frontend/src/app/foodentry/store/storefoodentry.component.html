@@ -1,0 +1,29 @@
+<nav class="navbar bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand">{{ title }}</a>
+  </div>
+</nav>
+<form [formGroup]="foodEntryForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="productName" class="form-label">Product Name</label>
+      <input type="text" size="200" formControlName="product_name" class="form-control" id="productName">
+    </div>
+    <div class="mb-3">
+      <label for="calories" class="form-label">Calories</label>
+      <input type="number" formControlName="calorie_value" class="form-control" id="calories" min="0">
+      <p *ngIf="userConstraintsAvailable" [ngClass]="(caloriesConsumed > foodEntry.userConstraints.user_settings.daily_calories) ? 'text-danger' : 'text-success'">Calories consumed by day: {{ caloriesConsumed }} / {{ foodEntry.userConstraints.user_settings.daily_calories}}</p>
+
+    </div>
+    <div class="mb-3">
+        <label for="price" class="form-label">Price ($)</label>
+        <input type="number" formControlName="price" class="form-control" id="price" min="0">
+        <p *ngIf="userConstraintsAvailable" [ngClass]="(budgetSpent > foodEntry.userConstraints.user_settings.monthly_budget) ? 'text-danger' : 'text-success'">Budget spent by month: {{ budgetSpent }} / {{ foodEntry.userConstraints.user_settings.monthly_budget}}</p>
+      </div>
+    <div class="mb-3">
+      <label for="consumedAt" class="form-label">Consumed Date and Time</label>
+      <input type="text" formControlName="consumed_at" class="form-control" id="consumedAt">
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>&nbsp;
+    <button (click)="cancel()" type="button" class="btn btn-secondary">Cancel</button>
+    <div>{{ responseText }}</div>
+  </form>

@@ -1,0 +1,43 @@
+<nav class="navbar bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="foodentries">{{ title }}</a>
+    <button *ngIf="roleCheck != 'admin'" [routerLink]="['/add-foodentry']" class="d-flex" type="button" class="btn btn-secondary">Add New</button>
+  </div>
+</nav>
+<p *ngIf="allFoodEntries.length == 0 && showFoodEntries">No food entry added</p>
+<div class="row" [hidden]="allFoodEntries.length == 0 && showFoodEntries">
+  <div class="col-md-4">
+    <input type="text" class="form-control" placeholder="From Date" id="fromEntryDate">
+  </div>
+  <div class="col-md-4">
+    <input type="text" class="form-control" placeholder="To Date" id="toEntryDate">
+  </div>
+  <div class="col-md-4">
+    <button type="button" (click)="filterByDate()" class="btn btn-primary">Search</button>
+  </div>
+</div>
+<table class="table" *ngIf="filteredFoodEntries.length > 0">
+    <thead>
+      <tr>
+        <th scope="col">Product</th>
+        <th scope="col">Consumed Date</th>
+        <th scope="col">Calorie Value</th>
+        <th scope="col">Price ($)</th>
+        <th *ngIf="roleCheck == 'admin'" scope="col">Subscriber</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let fe of filteredFoodEntries">
+        <td>{{ fe.product_name}}</td>
+        <td>{{ fe.consumed_at}}</td>
+        <td>{{ fe.calorie_value}}</td>
+        <td>{{ fe.price}}</td>
+        <td *ngIf="roleCheck == 'admin'">{{ fe.user.name }}</td>
+        <td>
+          <button [routerLink]="['/edit-foodentry', fe.id]" type="button" class="btn btn-secondary">Edit</button>&nbsp;
+          <button (click)="delete(fe.id)" type="button" class="btn btn-danger">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>

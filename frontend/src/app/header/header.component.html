@@ -1,0 +1,18 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="foodentries">Calories Tracking App</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav" *ngIf="tokenCheck != null">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="foodentries">Food Entries</a>
+          </li>
+          <li class="nav-item" *ngIf="userRole == 'admin'">
+            <a class="nav-link" href="reports">Reports</a>
+          </li>
+        </ul>
+      </div>
+      <button class="d-flex" (click)="logout()" type="button" class="btn btn-secondary" *ngIf="tokenCheck != null">Logout</button>
+  </nav>
+  

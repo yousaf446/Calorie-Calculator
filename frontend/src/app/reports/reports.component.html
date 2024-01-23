@@ -1,0 +1,32 @@
+<nav class="navbar bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand">{{ title }}</a>
+    </div>
+  </nav>
+<div class="row" *ngIf="showReports">
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-body">
+          <h5 class="card-title">Food entries added in last 7 days</h5>
+          <h1 class="card-text">{{ reportsData.foodentries_last7days }}</h1>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-body">
+            <h5 class="card-title">Food entries added week before last week</h5>
+            <h1 class="card-text">{{ reportsData.foodentries_7daysbefore }}</h1>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center">
+          <div class="card-body">
+              <h5 class="card-title">Average calories added per user in last 7 days</h5>
+              <h1 class="card-text">{{ reportsData.avg_calories_added_last7days }}</h1>
+          </div>
+        </div>
+      </div>
+  </div>
+  <br/>
